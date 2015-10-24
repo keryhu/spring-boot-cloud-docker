@@ -15,8 +15,8 @@
     </properties>
 
     <scm>
-        <connection>scm:git:git@ibgit.iaginnovation.com:justin.davis/ib.boot.git</connection>
-        <developerConnection>scm:git:git@ibgit.iaginnovation.com:justin.davis/ib.boot.git</developerConnection>
+        <connection>scm:git:git@github.com:justindav1s/spring-boot-cloud-docker.git</connection>
+        <developerConnection>scm:git:git@github.com:justindav1s/spring-boot-cloud-docker.git</developerConnection>
     </scm>
 
     <modules>
