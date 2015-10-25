@@ -51,7 +51,8 @@ public class ProductRepositoryProxy implements ProductRepository{
         return resp;
     }
 
-    public Object getDefaultProduct() {
+    public Object getDefaultProduct(Long id) {
+        log.error("TRIGGERED HYSTRIX CIRCUIT BREAKER");
         return new Product(0L, "null product");
     }
 
