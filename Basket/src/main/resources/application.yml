@@ -1,20 +1,13 @@
-spring:
-  application:
-    name: basket-services
-
 server:
-     port: 9000
-     address: localhost
-
-logging:
-  levels:
-    org.springframework.boot.env.PropertySourcesLoader: TRACE
-    org.springframework.web: DEBUG
-    org.springframework.cloud: DEBUG
+  port: 8080
 
 eureka:
-  instance:
-    hostname: localhost
   client:
-    healthcheck:
-      enabled: true
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+  instance:
+    preferIpAddress: true
+
+ribbon:
+  eureka:
+    enabled: true

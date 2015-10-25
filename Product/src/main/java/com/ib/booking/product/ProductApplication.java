@@ -21,6 +21,6 @@ public class ProductApplication {
 
     @RequestMapping("/")
     public String ping() {
-        return "Product UP\n";
+        return ProductApplication.class+" UP\n";
     }
 }
