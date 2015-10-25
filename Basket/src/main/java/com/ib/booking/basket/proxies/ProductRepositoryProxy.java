@@ -34,7 +34,7 @@ public class ProductRepositoryProxy implements ProductRepository{
     private RestTemplate restTemplate;
 
     @Override
-    @HystrixCommand(fallbackMethod = "getDefaultProduct")
+    @HystrixCommand(fallbackMethod = "handleProductServiceError")
     public Product getProduct(Long id) {
         getProductServices();
 
@@ -51,9 +51,9 @@ public class ProductRepositoryProxy implements ProductRepository{
         return resp;
     }
 
-    public Object getDefaultProduct(Long id) {
+    public Object handleProductServiceError(Long id) {
         log.error("TRIGGERED HYSTRIX CIRCUIT BREAKER");
-        return new Product(0L, "null product");
+        return new Product(id, "product repository down");
     }
 
 

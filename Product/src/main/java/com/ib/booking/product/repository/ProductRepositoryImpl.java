@@ -2,6 +2,10 @@ package com.ib.booking.product.repository;
 
 import com.ib.commercial.model.Product;
 import com.ib.commercial.model.repositories.ProductRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -11,7 +15,10 @@ import java.util.HashMap;
  */
 
 @Component("ProductRepository")
+@EnableCircuitBreaker
 public class ProductRepositoryImpl implements ProductRepository {
+
+    private Log log = LogFactory.getLog(ProductRepositoryImpl.class);
 
     HashMap<String, Product> products = new HashMap<>();
 
@@ -31,9 +38,15 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    @HystrixCommand(fallbackMethod = "handleProductAvailabilityError")
     public Product getProduct(Long id)  {
         String idStr = new Long(id).toString();
         return products.get(idStr);
+    }
+
+    public Product handleProductAvailabilityError(Long id)  {
+        log.error("TRIGGERED HYSTRIX CIRCUIT BREAKER");
+        return new Product(id, "product not in inventory");
     }
 
 }
