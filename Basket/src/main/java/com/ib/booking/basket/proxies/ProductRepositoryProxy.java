@@ -36,7 +36,7 @@ public class ProductRepositoryProxy implements ProductRepository{
 
         ResponseEntity<Product> exchange =
                 this.restTemplate.exchange(
-                        "http://product-services/product/{id}",
+                        "http://product/product/{id}",
                         HttpMethod.GET,
                         null,
                         new ParameterizedTypeReference<Product>() {},
@@ -58,7 +58,7 @@ public class ProductRepositoryProxy implements ProductRepository{
         }
         log.debug("Discovery Client description : " + discoveryClient.description());
 
-        List<ServiceInstance> serviceInstances = discoveryClient.getInstances("product-services");
+        List<ServiceInstance> serviceInstances = discoveryClient.getInstances("product");
 
         it = serviceInstances.iterator();
         while (it.hasNext())   {
