@@ -19,7 +19,6 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<maven.build.timestamp.format>yyMMdd-HHmmss</maven.build.timestamp.format>
 		<container.listen.port>8080</container.listen.port>
 	</properties>
 
@@ -60,25 +59,7 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
-		<dependency>
-			<groupId>antlr</groupId>
-			<artifactId>antlr</artifactId>
-			<version>2.7.7</version>
-		</dependency>
-
 	</dependencies>
-	
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-parent</artifactId>
-				<version>Angel.SR3</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 	
 	<build>
 		<finalName>${project.artifactId}</finalName>

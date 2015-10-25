@@ -19,7 +19,6 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<maven.build.timestamp.format>yyMMdd-HHmmss</maven.build.timestamp.format>
 		<container.listen.port>8080</container.listen.port>
 	</properties>
 

@@ -54,7 +54,7 @@
 					<verbose>true</verbose>
 					<images>
 						<image>
-							<alias>${project.artifactId}_${maven.build.timestamp}</alias>
+							<alias>${project.artifactId}</alias>
 							<name>${docker.image.prefix}/${project.artifactId}</name>
 							<build>
 								<from>java:8</from>
