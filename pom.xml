@@ -28,6 +28,7 @@
 	<module>Config</module>
         <module>Zuul</module>
         <module>commercial-model</module>
+        <module>hystrix</module>
     </modules>
 
     <dependencies>

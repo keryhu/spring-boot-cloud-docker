@@ -3,12 +3,15 @@ server:
 
 eureka:
   client:
+    registryFetchIntervalSeconds: 3
     serviceUrl:
       defaultZone: http://eureka:8761/eureka/
     healthcheck:
       enabled: true
   instance:
     preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 5
+
 
 ribbon:
   eureka:

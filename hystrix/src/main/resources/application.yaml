@@ -1,0 +1,28 @@
+server:
+  port: 9000
+
+eureka:
+  instance:
+    hostname: hystrix
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka:${server.port}/eureka/
+
+spring.cloud.config.discovery.enabled: true
+
+
+info:
+  component: Hystrix Dashboard
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
