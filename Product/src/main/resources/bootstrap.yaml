@@ -1,6 +1,6 @@
 spring:
   application:
-    name: basket
+    name: product
   cloud:
     config:
       uri: http://config:8888

@@ -112,7 +112,7 @@
 							<run>
 								<namingStrategy>alias</namingStrategy>
 								<ports>
-									<port>host.port:${container.listen.port}</port>
+									<port>${container.listen.port}:${container.listen.port}</port>
 								</ports>
 								<links>
 									<link>config:config</link>

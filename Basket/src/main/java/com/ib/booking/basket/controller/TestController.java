@@ -20,13 +20,13 @@ public class TestController {
 
     private Log log = LogFactory.getLog(TestController.class);
 
-    @Value("${prop.1}") private String prop1;
+    @Value("${prop.1:1}") private String prop1;
 
     @RequestMapping(value = "/echo/{echoStr}", method = RequestMethod.GET)
     ResponseEntity<?> echo(@PathVariable String echoStr) {
 
         log.debug("Echo : "+echoStr);
         log.debug("Prop : "+prop1);
-        return new ResponseEntity<>(echoStr, null, HttpStatus.CREATED);
+        return new ResponseEntity<>(echoStr, null, HttpStatus.OK);
     }
 }
