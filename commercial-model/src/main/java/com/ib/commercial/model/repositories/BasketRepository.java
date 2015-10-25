@@ -15,5 +15,6 @@ public interface BasketRepository {
     public void remove(Long basketId);
     public void update(Basket basket);
     public HashMap<String, Basket> list();
+    public void clear();
 
 }

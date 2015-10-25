@@ -42,4 +42,9 @@ public class BasketRepositoryImpl implements com.ib.commercial.model.repositorie
     public HashMap<String, Basket> list()  {
         return baskets;
     }
+
+    @Override
+    public void clear() {
+        baskets = new HashMap<>();
+    }
 }
