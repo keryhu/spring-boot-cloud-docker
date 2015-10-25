@@ -8,6 +8,10 @@ cd ../Config
 mvn clean package docker:build docker:start
 sleep 10
 
+cd ../hystrix
+mvn clean package docker:build docker:start
+sleep 10
+
 cd ../Product
 mvn clean package docker:build docker:start
 sleep 2
