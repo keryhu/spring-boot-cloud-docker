@@ -41,7 +41,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     @HystrixCommand(fallbackMethod = "handleProductAvailabilityError")
     public Product getProduct(Long id)  {
         String idStr = new Long(id).toString();
-        return products.get(idStr);
+
+        Product p = products.get(idStr);
+        if (p == null)  {
+            throw new RuntimeException("Product Not Available");
+        }
+        return p;
     }
 
     public Product handleProductAvailabilityError(Long id)  {

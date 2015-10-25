@@ -23,6 +23,9 @@ sleep 1
 curl -X PUT http://${DOCKER_DAEMON_IP}:8080/basket/1/add/4 | python -m json.tool
 sleep 1
 
+curl -X PUT http://${DOCKER_DAEMON_IP}:8080/basket/1/add/12 | python -m json.tool
+sleep 1
+
 curl -X DELETE http://${DOCKER_DAEMON_IP}:8080/basket/1/remove/3 | python -m json.tool
 sleep 1
 
