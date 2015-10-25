@@ -10,7 +10,7 @@ public class Product {
     private Long id = 0L;
     private String name = null;
 
-    public Product() {}
+    private Product() {}
 
     public Product(Long id, String name) {
         this.id = id;
