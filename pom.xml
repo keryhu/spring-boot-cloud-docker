@@ -20,12 +20,12 @@
     </scm>
 
     <modules>
-        <module>Basket</module>
-        <module>Payment</module>
-        <module>Product</module>
-        <module>Eureka</module>
-	<module>Config</module>
-        <module>Zuul</module>
+        <module>basket</module>
+        <module>payment</module>
+        <module>product</module>
+        <module>eureka</module>
+	<module>config</module>
+        <module>zuul</module>
         <module>commercial-model</module>
         <module>hystrix</module>
     </modules>
