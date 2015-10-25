@@ -104,7 +104,7 @@
 									<descriptor>assembly.xml</descriptor>
 								</assembly>
 								<entryPoint>
-									<shell>java -XX:PermSize=512m -Djava.security.egd=file:/dev/./urandom -Xmx1024m -jar /maven/app/${project.build.finalName}.jar</shell>
+									<shell>java -XX:PermSize=256m -Xmx768m -Djava.security.egd=file:/dev/./urandom -jar /maven/app/${project.build.finalName}.jar</shell>
 								</entryPoint>
 							</build>
 							<run>

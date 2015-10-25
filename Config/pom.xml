@@ -22,7 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
 		<docker.image.prefix>justindav1s</docker.image.prefix>
-        <docker.image.name>${project.artifactId}</docker.image.name>
+		<container.listen.port>8888</container.listen.port>
 	</properties>
 
 	<dependencies>
@@ -66,28 +66,28 @@
                     <verbose>true</verbose>
                     <images>
                         <image>
-                            <alias>${docker.image.name}</alias>
-                            <name>${docker.image.prefix}/${docker.image.name}</name>
+                            <alias>${project.artifactId}</alias>
+                            <name>${docker.image.prefix}/${project.artifactId}</name>
                             <build>
                                 <from>java:8</from>
 								<tags>
 									<tag>latest</tag>
 								</tags>
 								<ports>
-									<port>8888</port>
+									<port>${container.listen.port}</port>
 								</ports>
                                 <maintainer>justinndavis@gmail.com</maintainer>
                                 <assembly>
                                     <descriptor>assembly.xml</descriptor>
                                 </assembly>
 								<entryPoint>
-									<shell>java -XX:PermSize=512m -Xmx1536m -Djava.security.egd=file:/dev/./urandom -jar /maven/app/${project.build.finalName}.jar</shell>
+									<shell>java -XX:PermSize=256m -Xmx768m -Djava.security.egd=file:/dev/./urandom -jar /maven/app/${project.build.finalName}.jar</shell>
 								</entryPoint>
                             </build>
                             <run>
                                 <namingStrategy>alias</namingStrategy>
                                 <ports>
-                                    <port>8888:8888</port>
+                                    <port>${container.listen.port}:${container.listen.port}</port>
                                 </ports>
 								<links>
 									<link>eureka:eureka</link>
