@@ -19,9 +19,6 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.7</java.version>
-		<docker.image.prefix>justindav1s</docker.image.prefix>
 		<container.listen.port>8989</container.listen.port>
 	</properties>
 
