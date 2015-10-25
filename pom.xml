@@ -31,10 +31,11 @@
         <module>payment</module>
         <module>product</module>
         <module>eureka</module>
-	<module>config</module>
+	    <module>config</module>
         <module>zuul</module>
         <module>commercial-model</module>
         <module>hystrix</module>
+        <module>turbine</module>
     </modules>
 
     <dependencies>
