@@ -2,10 +2,12 @@ package com.ib.booking.basket.proxies;
 
 import com.ib.commercial.model.Product;
 import com.ib.commercial.model.repositories.ProductRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -20,6 +22,7 @@ import java.util.List;
  * Created by justin on 13/10/2015.
  */
 @Component("ProductRepository")
+@EnableCircuitBreaker
 public class ProductRepositoryProxy implements ProductRepository{
 
     private Log log = LogFactory.getLog(ProductRepositoryProxy.class);
@@ -31,6 +34,7 @@ public class ProductRepositoryProxy implements ProductRepository{
     private RestTemplate restTemplate;
 
     @Override
+    @HystrixCommand(fallbackMethod = "getDefaultProduct")
     public Product getProduct(Long id) {
         getProductServices();
 
@@ -45,6 +49,10 @@ public class ProductRepositoryProxy implements ProductRepository{
         Product resp = exchange.getBody();
         log.debug("Product Response : "+resp);
         return resp;
+    }
+
+    public Object getDefaultProduct() {
+        return new Product(0L, "null product");
     }
 
 
