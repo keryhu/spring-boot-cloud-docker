@@ -1,5 +1,8 @@
 package com.ib.commercial.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.util.ArrayList;
 
 /**
@@ -31,5 +34,28 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(5, 7). // two randomly chosen prime numbers
+                append(name).
+                append(id).
+                toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Product))
+            return false;
+        if (obj == this)
+            return true;
+
+        Product rhs = (Product) obj;
+        return new EqualsBuilder().
+                append(name, rhs.name).
+                append(id, rhs.id).
+                isEquals();
     }
 }

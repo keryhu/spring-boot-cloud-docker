@@ -12,6 +12,9 @@ cd ../hystrix
 mvn clean package docker:build docker:start
 sleep 10
 
+cd ../commercial-model
+mvn clean install
+
 cd ../Product
 mvn clean package docker:build docker:start
 sleep 2

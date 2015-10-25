@@ -70,7 +70,7 @@ public class BasketController {
 
         Product product = productrepository.getProduct(productId);
         Basket basket = basketRepository.get(basketId);
-        basket.getProducts().add(product);
+        basket.getProducts().remove(product);
         basketRepository.update(basket);
         return new ResponseEntity<>(basket, null, HttpStatus.OK);
     }
