@@ -23,7 +23,6 @@
         <module>Basket</module>
         <module>Payment</module>
         <module>Product</module>
-        <module>Ribbon</module>
         <module>Eureka</module>
 	<module>Config</module>
         <module>Zuul</module>
