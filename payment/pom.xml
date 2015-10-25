@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ib.booking.payment</groupId>
-	<artifactId>Payment</artifactId>
+	<artifactId>payment</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Payment</name>
+	<name>payment</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>

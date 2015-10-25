@@ -10,6 +10,12 @@
     <version>1.0.0-SNAPSHOT</version>
     <name>com.ib.microservices:microservices-reactor</name>
 
+    <parent>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-parent</artifactId>
+            <version>1.2.6.RELEASE</version>
+    </parent>
+
     <properties>
 
     </properties>
@@ -37,5 +43,17 @@
             <version>1.1.3</version>
         </dependency>
     </dependencies>
+
+        <dependencyManagement>
+                <dependencies>
+                        <dependency>
+                                <groupId>org.springframework.cloud</groupId>
+                                <artifactId>spring-cloud-starter-parent</artifactId>
+                                <version>Angel.SR3</version>
+                                <type>pom</type>
+                                <scope>import</scope>
+                        </dependency>
+                </dependencies>
+        </dependencyManagement>
 
 </project>
