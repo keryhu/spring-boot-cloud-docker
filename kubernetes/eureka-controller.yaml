@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: eureka
+  labels:
+    name: eureka
+spec:
+  replicas: 1
+  selector:
+    name: eureka
+  template:
+    metadata:
+      labels:
+        name: eureka
+    spec:
+      containers:
+      - name: eureka
+        image: justindav1s/eureka
+        ports:
+        - containerPort: 8761
