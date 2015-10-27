@@ -12,4 +12,9 @@ sleep 5
 ${KUB_HOME}/cluster/kubectl.sh create -f config-service.yaml
 sleep 5
 
+${KUB_HOME}/cluster/kubectl.sh create -f product-controller.yaml
+sleep 5
+${KUB_HOME}/cluster/kubectl.sh create -f product-service.yaml
+sleep 5
+
 ./status.sh
