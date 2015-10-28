@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    registryFetchIntervalSeconds: 3
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+    healthcheck:
+      enabled: true
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 5
+
+spring.cloud.config.discovery.enabled: true
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+ribbon:
+  eureka:
+    enabled: true
+
+zuul:
+  ignoredServices: '*'
+  routes:
+    basket:
+      path: /basket/**
+      stripPrefix: false
+      retryable: true;
