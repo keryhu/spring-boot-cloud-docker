@@ -15,10 +15,13 @@ do
     echo Starting product_$NUM
     docker run -d -p :8080 --name product_$NUM --link eureka:eureka --link config:config justindav1s/product
     sleep 5
+    echo Starting basket_$NUM
+    docker run -d -p :8080 --name basket_$NUM --link eureka:eureka --link config:config justindav1s/basket
+    sleep 5
 done
 
+docker run -d -p 8080:8080 --name zuul --link eureka:eureka --link config:config justindav1s/zuul
 
-docker run -d -p 8080:8080 --name basket --link eureka:eureka --link config:config justindav1s/basket
 
 
 

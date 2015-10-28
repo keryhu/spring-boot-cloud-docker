@@ -95,7 +95,7 @@
 							<run>
 								<namingStrategy>alias</namingStrategy>
 								<ports>
-									<port>host.port:${container.listen.port}</port>
+									<port>9000:${container.listen.port}</port>
 								</ports>
 								<links>
 									<link>config:config</link>
