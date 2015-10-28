@@ -32,4 +32,4 @@ zuul:
     basket:
       path: /basket/**
       stripPrefix: false
-      retryable: true;
+      retryable: true
