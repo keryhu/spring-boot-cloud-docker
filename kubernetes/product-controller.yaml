@@ -1,17 +1,17 @@
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  name: product-controller
+  name: product
   labels:
-    name: product-controller
+    name: product
 spec:
   replicas: 2
   selector:
-    name: product-controller
+    name: product
   template:
     metadata:
       labels:
-        name: product-controller
+        name: product
     spec:
       containers:
       - name: product

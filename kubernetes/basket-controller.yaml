@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: basket
+  labels:
+    name: basket
+spec:
+  replicas: 1
+  selector:
+    name: basket
+  template:
+    metadata:
+      labels:
+        name: basket
+    spec:
+      containers:
+      - name: basket
+        image: justindav1s/basket
+        ports:
+        - containerPort: 8080

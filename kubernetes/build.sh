@@ -17,4 +17,11 @@ sleep 5
 ${KUB_HOME}/cluster/kubectl.sh create -f product-service.yaml
 sleep 5
 
+${KUB_HOME}/cluster/kubectl.sh create -f basket-pod.yaml
+sleep 5
+${KUB_HOME}/cluster/kubectl.sh create -f basket-controller.yaml
+sleep 5
+${KUB_HOME}/cluster/kubectl.sh create -f basket-service.yaml
+sleep 5
+
 ./status.sh

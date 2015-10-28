@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: product
+  name: basket
   labels:
-    name: product
+    name: basket
 
 spec:
   # if your cluster supports it, uncomment the following to automatically create
@@ -15,4 +15,4 @@ spec:
     # the port that this service should serve on
   - port: 8080
   selector:
-    name: product
+    name: basket
