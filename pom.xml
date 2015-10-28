@@ -22,6 +22,7 @@
         <java.version>1.8</java.version>
         <docker.image.prefix>justindav1s</docker.image.prefix>
         <maven.build.timestamp.format>yyMMdd-HHmmss</maven.build.timestamp.format>
+        <jvm.settings>-XX:PermSize=256m -Xmx512m -Djava.security.egd=file:/dev/./urandom</jvm.settings>
     </properties>
 
     <scm>
