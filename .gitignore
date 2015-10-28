@@ -1,5 +1,8 @@
 ### SVN template
 .svn/
+
+*.tar
+
 ### Vagrant template
 .vagrant/
 ### NetBeans template

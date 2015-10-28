@@ -10,9 +10,9 @@ cd ../config
 mvn clean package docker:build
 sleep 10
 
-#cd ../turbine
-#mvn clean package docker:build
-#sleep 10
+cd ../zuul
+mvn clean package docker:build
+sleep 10
 
 cd ../hystrix
 mvn clean package docker:build
