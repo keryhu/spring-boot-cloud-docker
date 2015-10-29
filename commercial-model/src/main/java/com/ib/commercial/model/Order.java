@@ -1,22 +1,25 @@
 package com.ib.commercial.model;
 
+import org.springframework.data.annotation.Id;
+
 /**
  * Created by justin on 13/10/2015.
  */
 public class Order {
 
-    private long id = 0;
+    @Id
+    private String id;
     private Basket basket = null;
     private Payment payment = null;
     private Boolean confirmed = false;
 
     public Order() {}
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

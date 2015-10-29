@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface BasketRepository {
 
-    public Basket get(Long basketId);
+    public Basket get(String basketId);
     public Basket add(Basket basket);
-    public void remove(Long basketId);
+    public void remove(String basketId);
     public void update(Basket basket);
     public HashMap<String, Basket> list();
     public void clear();

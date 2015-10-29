@@ -2,6 +2,7 @@ package com.ib.commercial.model;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
 
@@ -10,17 +11,19 @@ import java.util.ArrayList;
  */
 public class Basket {
 
-    private Long id = 0L;
+
+    @Id
+    private String id;
 
     public Basket() {}
 
     private ArrayList<Product> products = new ArrayList<Product>();
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

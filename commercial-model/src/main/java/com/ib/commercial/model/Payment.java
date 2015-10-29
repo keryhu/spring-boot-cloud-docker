@@ -1,10 +1,14 @@
 package com.ib.commercial.model;
 
+import org.springframework.data.annotation.Id;
+
 /**
  * Created by justin on 13/10/2015.
  */
 public class Payment {
 
+    @Id
+    private String id;
     private String cardType = null;
     private String cardNum = null;
     private String cardName = null;
@@ -51,5 +55,13 @@ public class Payment {
 
     public void setCvc(String cvc) {
         this.cvc = cvc;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
