@@ -3,12 +3,11 @@ package com.ib.commercial.model.repositories;
 import com.ib.commercial.model.Basket;
 
 import java.util.HashMap;
-import java.util.List;
-
+import org.springframework.data.mongodb.repository.MongoRepository;
 /**
  * Created by justin on 13/10/2015.
  */
-public interface BasketRepository {
+public interface BasketRepository extends MongoRepository<Basket, String>{
 
     public Basket get(String basketId);
     public Basket add(Basket basket);

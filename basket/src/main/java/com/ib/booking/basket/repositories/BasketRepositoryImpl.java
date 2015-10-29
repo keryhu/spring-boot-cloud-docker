@@ -17,26 +17,26 @@ public class BasketRepositoryImpl implements com.ib.commercial.model.repositorie
     HashMap<String, Basket> baskets = new HashMap<>();
 
     @Override
-    public Basket get(Long basketId) {
-        return baskets.get(basketId.toString());
+    public Basket get(String basketId) {
+        return baskets.get(basketId);
     }
 
     @Override
     public Basket add(Basket basket) {
-        Long id = new Long(baskets.size());
+        String id = new Long(baskets.size()).toString();
         basket.setId(id);
         baskets.put(id.toString(), basket);
         return basket;
     }
 
     @Override
-    public void remove(Long basketId) {
+    public void remove(String basketId) {
         baskets.remove(basketId);
     }
 
     @Override
     public void update(Basket basket) {
-        baskets.put(basket.getId().toString(), basket);
+        baskets.put(basket.getId(), basket);
     }
 
     public HashMap<String, Basket> list()  {

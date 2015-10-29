@@ -35,7 +35,7 @@ public class ProductRepositoryProxy implements ProductRepository{
 
     @Override
     @HystrixCommand(fallbackMethod = "handleProductServiceError")
-    public Product getProduct(Long id) {
+    public Product getProduct(String id) {
         getProductServices();
 
         ResponseEntity<Product> exchange =
@@ -51,7 +51,7 @@ public class ProductRepositoryProxy implements ProductRepository{
         return resp;
     }
 
-    public Object handleProductServiceError(Long id) {
+    public Object handleProductServiceError(String id) {
         log.error("TRIGGERED HYSTRIX CIRCUIT BREAKER");
         return new Product(id, "product repository down");
     }

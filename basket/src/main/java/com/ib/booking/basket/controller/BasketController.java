@@ -38,7 +38,7 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/{basketId}", method = RequestMethod.DELETE)
-    ResponseEntity<?> delete(@PathVariable Long basketId)    {
+    ResponseEntity<?> delete(@PathVariable String basketId)    {
         log.debug("Remove Basket#"+basketId);
         basketRepository.remove(basketId);
         return new ResponseEntity<>(null, null, HttpStatus.GONE);
@@ -52,7 +52,7 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/{basketId}/add/{productId}", method = RequestMethod.PUT)
-    ResponseEntity<Basket> add(@PathVariable Long basketId, @PathVariable Long productId) {
+    ResponseEntity<Basket> add(@PathVariable String basketId, @PathVariable String productId) {
 
         log.debug("Basket #"+basketId+" Add Product#"+productId);
 
@@ -64,7 +64,7 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/{basketId}/remove/{productId}", method = RequestMethod.DELETE)
-    ResponseEntity<Basket> remove(@PathVariable Long basketId, @PathVariable Long productId) {
+    ResponseEntity<Basket> remove(@PathVariable String basketId, @PathVariable String productId) {
 
         log.debug("Basket #"+basketId+" Add Product#"+productId);
 
@@ -76,7 +76,7 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/{basketId}/empty", method = RequestMethod.POST)
-    ResponseEntity<Basket> empty(@PathVariable Long basketId) {
+    ResponseEntity<Basket> empty(@PathVariable String basketId) {
 
         log.debug("Basket #"+basketId+" Emptying");
 
@@ -87,7 +87,7 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/{basketId}", method = RequestMethod.GET)
-    ResponseEntity<Basket>  get(@PathVariable Long basketId) {
+    ResponseEntity<Basket>  get(@PathVariable String basketId) {
 
         log.debug("Get basket : "+basketId);
 
