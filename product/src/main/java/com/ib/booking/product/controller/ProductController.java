@@ -22,7 +22,7 @@ public class ProductController {
 
 
     @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
-    Product get(@PathVariable Long productId) {
+    Product get(@PathVariable String productId) {
 
         log.debug("Product get : "+productId);
 
