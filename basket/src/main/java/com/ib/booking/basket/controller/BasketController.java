@@ -65,7 +65,7 @@ public class BasketController {
             basket.setProducts(new ArrayList<>());
             basket.getProducts().add(product);
         }
-        basketRepository.insert(basket);
+        basketRepository.save(basket);
         basket = basketRepository.findOne(basketId);
         return new ResponseEntity<>(basket, null, HttpStatus.OK);
     }
@@ -80,7 +80,7 @@ public class BasketController {
         if (basket.getProducts() != null) {
             basket.getProducts().remove(product);
         }
-        basketRepository.insert(basket);
+        basketRepository.save(basket);
         basket = basketRepository.findOne(basketId);
         return new ResponseEntity<>(basket, null, HttpStatus.OK);
     }
@@ -94,7 +94,7 @@ public class BasketController {
         if (basket.getProducts() != null) {
             basket.getProducts().clear();
         }
-        basketRepository.insert(basket);
+        basketRepository.save(basket);
         basket = basketRepository.findOne(basketId);
         return new ResponseEntity<>(basket, null, HttpStatus.OK);
     }
