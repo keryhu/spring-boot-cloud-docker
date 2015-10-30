@@ -18,10 +18,10 @@ cd ../commercial-model
 mvn clean install
 
 cd ../product
-mvn clean package docker:build
+mvn -DskipTests=true clean package docker:build 
 
 cd ../basket
-mvn clean package docker:build
+mvn -DskipTests=true clean package docker:build
 
 cd ..
 

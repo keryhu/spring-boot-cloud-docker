@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOCKER_DAEMON_IP=`docker-machine ip default`
-LISTEN_PORT=32773
+LISTEN_PORT=32788
 
 
 curl -X DELETE http://${DOCKER_DAEMON_IP}:${LISTEN_PORT}/basket/clearall | python -m json.tool

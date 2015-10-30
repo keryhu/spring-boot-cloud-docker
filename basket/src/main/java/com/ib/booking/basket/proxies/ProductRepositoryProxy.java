@@ -1,7 +1,6 @@
 package com.ib.booking.basket.proxies;
 
 import com.ib.commercial.model.Product;
-import com.ib.commercial.model.repositories.ProductRepository;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,9 +20,9 @@ import java.util.List;
 /**
  * Created by justin on 13/10/2015.
  */
-@Component("ProductRepository")
+@Component("ProductRepositoryProxy")
 @EnableCircuitBreaker
-public class ProductRepositoryProxy implements ProductRepository{
+public class ProductRepositoryProxy {
 
     private Log log = LogFactory.getLog(ProductRepositoryProxy.class);
 
@@ -33,7 +32,6 @@ public class ProductRepositoryProxy implements ProductRepository{
     @Autowired
     private RestTemplate restTemplate;
 
-    @Override
     @HystrixCommand(fallbackMethod = "handleProductServiceError")
     public Product getProduct(String id) {
         getProductServices();

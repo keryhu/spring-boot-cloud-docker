@@ -1,19 +1,19 @@
 package com.ib.booking.basket.controller;
 
+import com.ib.booking.basket.proxies.ProductRepositoryProxy;
+import com.ib.booking.basket.repositories.BasketRepository;
 import com.ib.commercial.model.Basket;
 import com.ib.commercial.model.Product;
-import com.ib.commercial.model.repositories.BasketRepository;
-import com.ib.commercial.model.repositories.ProductRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Logger;
+import java.util.List;
 
 
 @RestController
@@ -23,31 +23,31 @@ public class BasketController {
     private Log log = LogFactory.getLog(BasketController.class);
 
     @Autowired
-    private ProductRepository productrepository;
+    private ProductRepositoryProxy productrepository;
 
     @Autowired
     private BasketRepository basketRepository;
 
-    @RequestMapping(value = "/create", method = RequestMethod.PUT)
-    ResponseEntity<?> create() {
+    @RequestMapping(value = "/create/{basketId}", method = RequestMethod.PUT)
+    ResponseEntity<?> create(@PathVariable String basketId) {
 
         log.debug("Create");
-
-        Basket basket = basketRepository.add(new Basket());
+        basketRepository.insert(new Basket(basketId));
+        Basket basket = basketRepository.findOne(basketId);
         return new ResponseEntity<>(basket, null, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{basketId}", method = RequestMethod.DELETE)
     ResponseEntity<?> delete(@PathVariable String basketId)    {
         log.debug("Remove Basket#"+basketId);
-        basketRepository.remove(basketId);
+        basketRepository.delete(basketId);
         return new ResponseEntity<>(null, null, HttpStatus.GONE);
     }
 
     @RequestMapping(value = "/clearall", method = RequestMethod.DELETE)
     ResponseEntity<?> clearall()    {
         log.debug("Clearing all Baskets");
-        basketRepository.clear();
+        basketRepository.deleteAll();
         return new ResponseEntity<>(null, null, HttpStatus.GONE);
     }
 
@@ -57,9 +57,16 @@ public class BasketController {
         log.debug("Basket #"+basketId+" Add Product#"+productId);
 
         Product product = productrepository.getProduct(productId);
-        Basket basket = basketRepository.get(basketId);
-        basket.getProducts().add(product);
-        basketRepository.update(basket);
+        Basket basket = basketRepository.findOne(basketId);
+        if (basket.getProducts() != null) {
+            basket.getProducts().add(product);
+        }
+        else    {
+            basket.setProducts(new ArrayList<>());
+            basket.getProducts().add(product);
+        }
+        basketRepository.insert(basket);
+        basket = basketRepository.findOne(basketId);
         return new ResponseEntity<>(basket, null, HttpStatus.OK);
     }
 
@@ -69,9 +76,12 @@ public class BasketController {
         log.debug("Basket #"+basketId+" Add Product#"+productId);
 
         Product product = productrepository.getProduct(productId);
-        Basket basket = basketRepository.get(basketId);
-        basket.getProducts().remove(product);
-        basketRepository.update(basket);
+        Basket basket = basketRepository.findOne(basketId);
+        if (basket.getProducts() != null) {
+            basket.getProducts().remove(product);
+        }
+        basketRepository.insert(basket);
+        basket = basketRepository.findOne(basketId);
         return new ResponseEntity<>(basket, null, HttpStatus.OK);
     }
 
@@ -80,9 +90,12 @@ public class BasketController {
 
         log.debug("Basket #"+basketId+" Emptying");
 
-        Basket basket = basketRepository.get(basketId);
-        basket.getProducts().clear();
-        basketRepository.update(basket);
+        Basket basket = basketRepository.findOne(basketId);
+        if (basket.getProducts() != null) {
+            basket.getProducts().clear();
+        }
+        basketRepository.insert(basket);
+        basket = basketRepository.findOne(basketId);
         return new ResponseEntity<>(basket, null, HttpStatus.OK);
     }
 
@@ -91,18 +104,18 @@ public class BasketController {
 
         log.debug("Get basket : "+basketId);
 
-        Basket basket = basketRepository.get(basketId);
+        Basket basket = basketRepository.findOne(basketId);
 
         return new ResponseEntity<>(basket, null, HttpStatus.OK);
     }
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    ResponseEntity<HashMap<String, Basket>>  list() {
+    ResponseEntity<List<Basket>>  list() {
 
         log.debug("List baskets");
 
-        HashMap<String, Basket> baskets = basketRepository.list();
+        List<Basket> baskets = basketRepository.findAll();
 
         return new ResponseEntity<>(baskets, null, HttpStatus.OK);
     }

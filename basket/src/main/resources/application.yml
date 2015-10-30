@@ -25,3 +25,9 @@ endpoints:
 ribbon:
   eureka:
     enabled: true
+
+spring:
+  data:
+    mongodb:
+      host: mongo
+      port : 27017
