@@ -18,7 +18,7 @@
 	<name>Authserver</name>
 
 	<properties>
-		<container.listen.port>8080</container.listen.port>
+		<container.listen.port>9999</container.listen.port>
 	</properties>
 
 	<dependencies>
