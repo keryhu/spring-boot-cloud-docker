@@ -23,7 +23,7 @@ import java.security.Principal;
  */
 
 @SpringBootApplication
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 @RestController
 @EnableResourceServer
 public class AuthServerApplication {
