@@ -7,18 +7,13 @@ set -x
 DOCKER_DAEMON_IP=`docker-machine ip default`
 LISTEN_PORT=8080
 
-curl -v -s booking_app:app_secret@${DOCKER_DAEMON_IP}:${LISTEN_PORT}/auth/oauth/token  \
- -d grant_type=password \
- -d client_id=booking_app \
- -d scope=bookingapi \
- -d username=justin \
- -d password=toffee | jq
+ACCESS_TOKEN=`./zuul_resourceowner.sh`
+echo ACCESS_TOKEN=${ACCESS_TOKEN}
 
-
-curl -X DELETE http://${DOCKER_DAEMON_IP}:${LISTEN_PORT}/basket/clearall | jq
+curl -H  "Authorization: Bearer invalid-access-token"  -X DELETE http://${DOCKER_DAEMON_IP}:${LISTEN_PORT}/basket/clearall | jq
 sleep 1
 
-curl -X PUT http://${DOCKER_DAEMON_IP}:${LISTEN_PORT}/basket/create/1 | jq
+curl -H  "Authorization: Bearer ${ACCESS_TOKEN}" -X PUT http://${DOCKER_DAEMON_IP}:${LISTEN_PORT}/basket/create/1 | jq
 sleep 1
 
 curl -X PUT http://${DOCKER_DAEMON_IP}:${LISTEN_PORT}/basket/create/2 | jq

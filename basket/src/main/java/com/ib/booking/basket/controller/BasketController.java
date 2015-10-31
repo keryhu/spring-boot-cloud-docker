@@ -4,13 +4,14 @@ import com.ib.booking.basket.proxies.ProductRepositoryProxy;
 import com.ib.booking.basket.repositories.BasketRepository;
 import com.ib.commercial.model.Basket;
 import com.ib.commercial.model.Product;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
 @RequestMapping("/basket")
 public class BasketController {
 
-    private Log log = LogFactory.getLog(BasketController.class);
+    private static final Logger log = LoggerFactory.getLogger(BasketController.class);
 
     @Autowired
     private ProductRepositoryProxy productrepository;
@@ -29,15 +30,18 @@ public class BasketController {
     private BasketRepository basketRepository;
 
     @RequestMapping(value = "/create/{basketId}", method = RequestMethod.PUT)
-    ResponseEntity<?> create(@PathVariable String basketId) {
+    ResponseEntity<?> create(@PathVariable String basketId,
+                             @RequestHeader(value="Authorization") String authorizationHeader,
+                             Principal currentUser) {
 
         log.debug("Create");
+        log.debug("ProductApi: User={}, Auth={}, called with productId={}", currentUser.getName(), authorizationHeader, basketId);
         basketRepository.insert(new Basket(basketId));
         Basket basket = basketRepository.findOne(basketId);
         return new ResponseEntity<>(basket, null, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{basketId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/remove/{basketId}", method = RequestMethod.DELETE)
     ResponseEntity<?> delete(@PathVariable String basketId)    {
         log.debug("Remove Basket#"+basketId);
         basketRepository.delete(basketId);
@@ -45,7 +49,8 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/clearall", method = RequestMethod.DELETE)
-    ResponseEntity<?> clearall()    {
+    ResponseEntity<?> clearall(@RequestHeader(value="Authorization") String authorizationHeader,
+                               Principal currentUser)    {
         log.debug("Clearing all Baskets");
         basketRepository.deleteAll();
         return new ResponseEntity<>(null, null, HttpStatus.GONE);

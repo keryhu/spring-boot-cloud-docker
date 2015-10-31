@@ -4,7 +4,7 @@ server:
 spring:
   oauth2:
     resource:
-      userInfoUri: http://authserver/auth/user
+      userInfoUri: http://authserver:9999/auth/user
   data:
     mongodb:
       host: mongo

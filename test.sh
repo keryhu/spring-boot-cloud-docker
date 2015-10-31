@@ -4,16 +4,12 @@ set -x
 #jq : https://stedolan.github.io/jq/
 
 DOCKER_DAEMON_IP=`docker-machine ip default`
-BASKET_PORT=8003
-PRODUCT_PORT=8001
+BASKET_PORT=8083
+PRODUCT_PORT=8081
 
+ACCESS_TOKEN=`./zuul_resourceowner.sh`
+echo ACCESS_TOKEN=${ACCESS_TOKEN}
 
-curl -v -s booking_app:app_secret@${DOCKER_DAEMON_IP}:9999/auth/oauth/token  \
- -d grant_type=password \
- -d client_id=booking_app \
- -d scope=bookingapi \
- -d username=justin \
- -d password=toffee | jq
 
 curl -X GET http://${DOCKER_DAEMON_IP}:${PRODUCT_PORT}/product/1 | jq
 curl -X GET http://${DOCKER_DAEMON_IP}:${PRODUCT_PORT}/product/2 | jq

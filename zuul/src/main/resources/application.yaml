@@ -29,7 +29,7 @@ ribbon:
 spring:
   oauth2:
     resource:
-      userInfoUri: http://authserver/auth/user
+      userInfoUri: http://authserver:9999/auth/user
 
 zuul:
   ignoredServices: '*'
@@ -38,7 +38,7 @@ zuul:
       path: /basket/**
       stripPrefix: false
       retryable: true
-    auth:
+    authserver:
       path: /auth/**
       stripPrefix: false
       retryable: true
