@@ -57,6 +57,7 @@ public class AuthServerApplication {
             clients.inMemory()
                     .withClient("booking_app")
                     .secret("app_secret")
+                    .resourceIds("basket")
                     .authorizedGrantTypes("authorization_code", "refresh_token", "implicit", "password", "client_credentials")
                     .scopes("bookingapi");
         }

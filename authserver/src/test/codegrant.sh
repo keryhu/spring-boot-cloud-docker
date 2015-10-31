@@ -1,10 +1,13 @@
 #!/bin/bash
 
-#http://localhost:9999/uaa/oauth/authorize?response_type=code&client_id=justin&redirect_uri=http://example.com&scope=bookingapi&state=97536
+DOCKER_DAEMON_IP=`docker-machine ip default`
+LISTEN_PORT=8080
 
-CODE=CYYFaS
+#http://192.168.99.101:8080/auth/oauth/authorize?response_type=code&client_id=booking_app&redirect_uri=http://example.com&scope=bookingapi&state=97536
 
-curl -v booking_app:app_secret@localhost:9999/auth/oauth/token \
+CODE=viiUc8
+
+curl -v booking_app:app_secret@192.168.99.101:8080/auth/oauth/token \
  -d grant_type=authorization_code \
  -d client_id=booking_app \
  -d redirect_uri=http://example.com \
