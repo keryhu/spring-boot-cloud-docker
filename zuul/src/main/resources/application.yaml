@@ -26,10 +26,19 @@ ribbon:
   eureka:
     enabled: true
 
+spring:
+  oauth2:
+    resource:
+      userInfoUri: http://authserver/auth/user
+
 zuul:
   ignoredServices: '*'
   routes:
     basket:
       path: /basket/**
+      stripPrefix: false
+      retryable: true
+    auth:
+      path: /auth/**
       stripPrefix: false
       retryable: true

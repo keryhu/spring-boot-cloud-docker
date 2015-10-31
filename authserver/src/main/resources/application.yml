@@ -1,6 +1,7 @@
 server:
   port: 9999
-  contextPath: /uaa
+  contextPath: /auth
+
 
 eureka:
   client:
@@ -29,7 +30,9 @@ ribbon:
 
 security:
   user:
-    password: password
+    name: justin
+    password: toffee
+
 
 logging:
   level:

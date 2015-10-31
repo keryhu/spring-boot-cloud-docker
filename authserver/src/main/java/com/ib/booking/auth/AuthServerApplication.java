@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -22,6 +23,7 @@ import java.security.Principal;
  */
 
 @SpringBootApplication
+//@EnableDiscoveryClient
 @RestController
 @EnableResourceServer
 public class AuthServerApplication {
@@ -53,10 +55,10 @@ public class AuthServerApplication {
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             clients.inMemory()
-                    .withClient("acme")
-                    .secret("acmesecret")
+                    .withClient("booking_app")
+                    .secret("app_secret")
                     .authorizedGrantTypes("authorization_code", "refresh_token", "implicit", "password", "client_credentials")
-                    .scopes("webshop");
+                    .scopes("bookingapi");
         }
     }
 
