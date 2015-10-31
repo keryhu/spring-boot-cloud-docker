@@ -1,6 +1,19 @@
 server:
   port: 8080
 
+spring:
+  oauth2:
+    resource:
+      userInfoUri: http://authserver/auth/user
+  data:
+    mongodb:
+      host: mongo
+      port : 27017
+  cloud:
+    config:
+      discovery:
+        enabled: true
+
 eureka:
   client:
     registryFetchIntervalSeconds: 3
@@ -11,13 +24,6 @@ eureka:
   instance:
     preferIpAddress: true
     leaseRenewalIntervalInSeconds: 5
-
-spring:
-  oauth2:
-    resource:
-      userInfoUri: http://authserver/auth/user
-
-spring.cloud.config.discovery.enabled: true
 
 endpoints:
   restart:
@@ -31,8 +37,4 @@ ribbon:
   eureka:
     enabled: true
 
-spring:
-  data:
-    mongodb:
-      host: mongo
-      port : 27017
+

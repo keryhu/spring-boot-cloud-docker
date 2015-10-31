@@ -19,14 +19,14 @@ sleep 10
 for NUM in 1 2
 do
     echo Starting product_$NUM
-    docker run -d -p :8080 --name product_$NUM --link eureka:eureka --link config:config --link mongo:mongo justindav1s/product
+    docker run -d -p 808${NUM}:8080 --name product_$NUM --link eureka:eureka --link config:config --link mongo:mongo justindav1s/product
     sleep 5
 done
 
-for NUM in 1 2
+for NUM in 3 4
 do
     echo Starting basket_$NUM
-    docker run -d -p :8080 --name basket_$NUM --link eureka:eureka --link config:config --link mongo:mongo justindav1s/basket
+    docker run -d -p 808${NUM}:8080 --name basket_$NUM --link eureka:eureka --link config:config --link mongo:mongo justindav1s/basket
     sleep 5
 done
 
