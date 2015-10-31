@@ -1,5 +1,6 @@
 server:
-  port: 8080
+  port: 9999
+  contextPath: /uaa
 
 eureka:
   client:
@@ -26,8 +27,10 @@ ribbon:
   eureka:
     enabled: true
 
-spring:
-  data:
-    mongodb:
-      host: mongo
-      port : 27017
+security:
+  user:
+    password: password
+
+logging:
+  level:
+    org.springframework.security: DEBUG
