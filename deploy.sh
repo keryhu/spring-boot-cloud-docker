@@ -10,7 +10,7 @@ docker run -d -p 9000:9000 --name hystrix justindav1s/hystrix
 sleep 5
 
 docker run -d -p 27017:27017 --name mongo mongo
-sleep 5
+sleep 10
 
 
 for NUM in 1 2
@@ -20,7 +20,7 @@ do
     sleep 5
 done
 
-for NUM in 1
+for NUM in 1 2
 do
     echo Starting basket_$NUM
     docker run -d -p :8080 --name basket_$NUM --link eureka:eureka --link config:config --link mongo:mongo justindav1s/basket

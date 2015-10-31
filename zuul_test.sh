@@ -8,10 +8,10 @@ LISTEN_PORT=8080
 curl -X DELETE http://${DOCKER_DAEMON_IP}:${LISTEN_PORT}/basket/clearall | python -m json.tool
 sleep 1
 
-curl -X PUT http://${DOCKER_DAEMON_IP}:${LISTEN_PORT}/basket/create | python -m json.tool
+curl -X PUT http://${DOCKER_DAEMON_IP}:${LISTEN_PORT}/basket/create/1 | python -m json.tool
 sleep 1
 
-curl -X PUT http://${DOCKER_DAEMON_IP}:${LISTEN_PORT}/basket/create | python -m json.tool
+curl -X PUT http://${DOCKER_DAEMON_IP}:${LISTEN_PORT}/basket/create/2 | python -m json.tool
 sleep 1
 
 curl -X GET http://${DOCKER_DAEMON_IP}:${LISTEN_PORT}/basket/list | python -m json.tool

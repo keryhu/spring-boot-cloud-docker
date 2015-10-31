@@ -3,8 +3,8 @@
 set -x
 
 DOCKER_DAEMON_IP=`docker-machine ip default`
-BASKET_PORT=32770
-PRODUCT_PORT=32768
+BASKET_PORT=32779
+PRODUCT_PORT=32778
 
 curl -X GET http://${DOCKER_DAEMON_IP}:${PRODUCT_PORT}/product/1 | python -m json.tool
 curl -X GET http://${DOCKER_DAEMON_IP}:${PRODUCT_PORT}/product/2 | python -m json.tool

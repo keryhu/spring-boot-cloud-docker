@@ -32,7 +32,7 @@ public class ProductRepositoryProxy {
     @Autowired
     private RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "handleProductServiceError")
+    @HystrixCommand(fallbackMethod = "handleProductNotAvailError")
     public Product getProduct(String id) {
         getProductServices();
 
@@ -46,17 +46,20 @@ public class ProductRepositoryProxy {
 
         Product resp = exchange.getBody();
         log.debug("Product Response : "+resp);
+
+        if (resp == null)
+            throw new RuntimeException();
+
         return resp;
     }
 
-    public Object handleProductServiceError(String id) {
+    public Object handleProductNotAvailError(String id) {
         log.error("TRIGGERED HYSTRIX CIRCUIT BREAKER");
-        return new Product(id, "product repository down");
+        return new Product(id, "product not available");
     }
 
 
-
-
+    @HystrixCommand(fallbackMethod = "handleProductServiceError")
     private void getProductServices()   {
         List<String> services = discoveryClient.getServices();
         Iterator it = services.iterator();
@@ -77,6 +80,11 @@ public class ProductRepositoryProxy {
             log.debug("ServiceInstance id : "+instance.getServiceId());
 
         }
+        this.restTemplate.getForEntity("http://product/", String.class);
+    }
 
+    public Object handleProductServiceError(String id) {
+        log.error("TRIGGERED HYSTRIX CIRCUIT BREAKER");
+        return new Product(id, "product repository down");
     }
 }
