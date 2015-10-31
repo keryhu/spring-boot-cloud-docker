@@ -14,6 +14,9 @@ mvn clean package docker:build
 cd ../hystrix
 mvn clean package docker:build
 
+cd ../authserver
+mvn clean package docker:build
+
 cd ../commercial-model
 mvn clean install
 

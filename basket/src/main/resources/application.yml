@@ -12,6 +12,11 @@ eureka:
     preferIpAddress: true
     leaseRenewalIntervalInSeconds: 5
 
+spring:
+  oauth2:
+    resource:
+      userInfoUri: http://authserver/auth/user
+
 spring.cloud.config.discovery.enabled: true
 
 endpoints:

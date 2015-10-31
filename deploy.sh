@@ -9,6 +9,9 @@ sleep 10
 docker run -d -p 9000:9000 --name hystrix justindav1s/hystrix
 sleep 5
 
+docker run -d -p 9999:9999 --name authserver justindav1s/authserver
+sleep 5
+
 docker run -d -p 27017:27017 --name mongo mongo
 sleep 10
 
