@@ -30,14 +30,14 @@ public class ProductRepositoryProxy {
     private DiscoveryClient discoveryClient;
 
     @Autowired
-    private RestTemplate restTemplate;
+    private RestTemplate loadBalancedRestTemplate;
 
     @HystrixCommand(fallbackMethod = "handleProductNotAvailError")
     public Product getProduct(String id) {
         getProductServices();
 
         ResponseEntity<Product> exchange =
-                this.restTemplate.exchange(
+                this.loadBalancedRestTemplate.exchange(
                         "http://product/product/{id}",
                         HttpMethod.GET,
                         null,
@@ -80,7 +80,7 @@ public class ProductRepositoryProxy {
             log.debug("ServiceInstance id : "+instance.getServiceId());
 
         }
-        this.restTemplate.getForEntity("http://product/", String.class);
+        this.loadBalancedRestTemplate.getForEntity("http://product/", String.class);
     }
 
     public Object handleProductServiceError(String id) {

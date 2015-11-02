@@ -7,6 +7,7 @@ import com.ib.commercial.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.security.oauth2.resource.EnableOAuth2Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/basket")
+@EnableOAuth2Resource
 public class BasketController {
 
     private static final Logger log = LoggerFactory.getLogger(BasketController.class);
@@ -30,12 +32,10 @@ public class BasketController {
     private BasketRepository basketRepository;
 
     @RequestMapping(value = "/create/{basketId}", method = RequestMethod.PUT)
-    ResponseEntity<?> create(@PathVariable String basketId,
-                             @RequestHeader(value="Authorization") String authorizationHeader,
-                             Principal currentUser) {
+    ResponseEntity<?> create(@PathVariable String basketId) {
 
         log.debug("Create");
-        log.debug("ProductApi: User={}, Auth={}, called with productId={}", currentUser.getName(), authorizationHeader, basketId);
+        //log.debug("ProductApi: User={}, Auth={}, called with productId={}", currentUser.getName(), authorizationHeader, basketId);
         basketRepository.insert(new Basket(basketId));
         Basket basket = basketRepository.findOne(basketId);
         return new ResponseEntity<>(basket, null, HttpStatus.CREATED);
@@ -49,8 +49,7 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/clearall", method = RequestMethod.DELETE)
-    ResponseEntity<?> clearall(@RequestHeader(value="Authorization") String authorizationHeader,
-                               Principal currentUser)    {
+    ResponseEntity<?> clearall()    {
         log.debug("Clearing all Baskets");
         basketRepository.deleteAll();
         return new ResponseEntity<>(null, null, HttpStatus.GONE);
