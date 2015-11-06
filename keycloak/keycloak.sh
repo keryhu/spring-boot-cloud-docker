@@ -5,5 +5,5 @@ docker run --name postgres -e POSTGRES_DATABASE=keycloak -e POSTGRES_USER=keyclo
 
 sleep 10
 
-docker run -p 8080:8080 --name keycloak --link postgres:postgres jboss/keycloak-postgres
+docker run -d -p 9080:8080 --name keycloak --link postgres:postgres jboss/keycloak-postgres
 
