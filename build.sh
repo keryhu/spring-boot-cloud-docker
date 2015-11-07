@@ -8,8 +8,6 @@ mvn clean package docker:build
 cd ../config
 mvn clean package docker:build
 
-cd ../zuul
-mvn clean package docker:build
 
 cd ../hystrix
 mvn clean package docker:build
@@ -22,6 +20,12 @@ mvn -DskipTests=true clean package docker:build
 
 cd ../basket
 mvn -DskipTests=true clean package docker:build
+
+cd ../zuul
+mvn clean package docker:build
+
+cd ../keycloak-proxy
+./build.sh
 
 cd ../varnish
 ./build.sh

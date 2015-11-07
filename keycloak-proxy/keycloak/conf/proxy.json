@@ -1,7 +1,7 @@
 {
   "target-url": "http://zuul:8080",
   "send-access-token": true,
-  "bind-address": "localhost",
+  "bind-address": "0.0.0.0",
   "http-port": "8080",
   "https-port": "",
   "keystore": "",
@@ -10,7 +10,6 @@
   "applications": [
     {
       "base-path": "/api",
-      "error-page": "/error.html",
       "adapter-config": {
         "realm": "master",
         "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtHraRaIgu062d80s/3WASUOZSqTt3JIdMJsXaODgHDHYIyVolcXI8ljyAM9IAr+Llk216olzp3sj2WWsbRj7TIOe4Vcm6ExwIEBYlUbdu1HWzA3DFfyBTE8q2j9qobFmlW2KMwZMjnsMCoQwgbfy3vpgduTjngXcCmo0zocgjDQdXeEr59eXtaJxrWbgNYFvS0Wj8YkmwEEY7ZARH9r2odKlaTkraq6Zpelt/zDDqweeH7Y4edTOWfDcVMYtKxmjmWs4Ngf+9U6qmbZ32wjZMshlGkY8zLKP2AZGXajQ5H4utqCeXEvxt2HyfatwPDGWxxc1g1iw7fjhUWpoXftGnQIDAQAB",
@@ -25,9 +24,7 @@
       "constraints": [
         {
           "pattern": "/product/*",
-          "roles-allowed": [
-            "user"
-          ],
+          "authenticate": true,
           "methods": [
             "GET",
             "POST",
@@ -37,18 +34,18 @@
         },
         {
           "pattern": "/basket/*",
-          "roles-allowed": [
-            "user"
-          ],
+          "authenticate": true,
           "methods": [
-            "GET",
             "POST",
             "PUT",
             "DELETE"
+          ],
+          "excluded-methods": [
+            "GET"
           ]
         },
         {
-          "pattern": "/api/stuff/*",
+          "pattern": "/test/*",
           "permit": true
         }
       ]

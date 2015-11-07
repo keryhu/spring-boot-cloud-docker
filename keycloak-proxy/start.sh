@@ -1,6 +1,6 @@
 #!/bin/bash
 
 docker run -d -p 7080:8080 \
-    --name keycloak_proxy \
+    --name keycloakproxy \
     justindav1s/keycloak_proxy
 
