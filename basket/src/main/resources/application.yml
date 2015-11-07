@@ -4,7 +4,7 @@ server:
 spring:
   oauth2:
     resource:
-      userInfoUri: http://192.168.99.100:8080/auth/realms/master/protocol/openid-connect/userinfo
+      userInfoUri: http://${DOCKER_MACHINE_ADDR}:9080/auth/realms/master/protocol/openid-connect/userinfo
   data:
     mongodb:
       host: mongo

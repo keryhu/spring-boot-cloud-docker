@@ -29,12 +29,11 @@ ribbon:
 spring:
   oauth2:
     resource:
-      userInfoUri: http://${DOCKER_MACHINE_ADDR}:8080/auth/realms/master/protocol/openid-connect/userinfo
+      userInfoUri: http://${DOCKER_MACHINE_ADDR}:9080/auth/realms/master/protocol/openid-connect/userinfo
 
 #userInfoUri: http://authserver:9999/auth/user
 
 zuul:
-  prefix: /api
   ignoredServices: '*'
   routes:
     basket:

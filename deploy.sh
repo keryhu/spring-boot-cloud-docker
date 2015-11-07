@@ -50,8 +50,8 @@ docker run -d -p 8080:8080 \
 docker run -d -p 80:80 \
     --link keycloak:keycloak \
     --link zuul:zuul \
-    --name httpd \
-    justindav1s/httpd
+    --name varnish \
+    justindav1s/varnish
 
 
 
