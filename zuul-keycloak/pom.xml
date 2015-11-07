@@ -44,15 +44,6 @@
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security.oauth</groupId>
-			<artifactId>spring-security-oauth2</artifactId>
-			<version>2.0.7.RELEASE</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
@@ -79,45 +70,19 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>org.jolokia</groupId>
+				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.13.6</version>
+				<version>0.3.5</version>
 				<configuration>
-					<logStdout>true</logStdout>
-					<verbose>true</verbose>
-					<images>
-						<image>
-							<!-- alias>${project.artifactId}_${maven.build.timestamp}</alias -->
-							<alias>${project.artifactId}</alias>
-							<name>${docker.image.prefix}/${project.artifactId}</name>
-							<build>
-								<from>java:8</from>
-								<tags>
-									<tag>latest</tag>
-								</tags>
-								<ports>
-									<port>${container.listen.port}</port>
-								</ports>
-								<maintainer>justinndavis@gmail.com</maintainer>
-								<assembly>
-									<descriptor>assembly.xml</descriptor>
-								</assembly>
-								<entryPoint>
-									<shell>java ${jvm.settings} -jar /maven/app/${project.build.finalName}.jar</shell>
-								</entryPoint>
-							</build>
-							<run>
-								<namingStrategy>alias</namingStrategy>
-								<ports>
-									<port>${container.listen.port}:${container.listen.port}</port>
-								</ports>
-								<links>
-									<link>config:config</link>
-									<link>eureka:eureka</link>
-								</links>
-							</run>
-						</image>
-					</images>
+					<imageName>${docker.image.prefix}/${project.artifactId}_keycloak</imageName>
+					<dockerDirectory>${project.build.sourceDirectory}/../docker</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.war</include>
+						</resource>
+					</resources>
 				</configuration>
 			</plugin>
 		</plugins>
