@@ -1,8 +1,7 @@
 #!/bin/bash
 
-docker run -p 80:80 \
-    --link keycloak:keycloak \
-    --link zuul:zuul \
+docker run -d -p 80:80 \
+    --link zuul_keycloak:zuul_keycloak \
     --name varnish \
     justindav1s/varnish
 

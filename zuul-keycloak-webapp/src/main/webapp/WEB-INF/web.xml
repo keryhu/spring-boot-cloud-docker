@@ -1,0 +1,61 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <listener>
+        <listener-class>com.ib.zuul.StartServer</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>ZuulServlet</servlet-name>
+        <servlet-class>com.netflix.zuul.http.ZuulServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ZuulServlet</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>ContextLifecycleFilter</filter-name>
+        <filter-class>com.netflix.zuul.context.ContextLifecycleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ContextLifecycleFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Basket</web-resource-name>
+            <url-pattern>/basket/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>user</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Product</web-resource-name>
+            <url-pattern>/product/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>user</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>this is ignored currently</realm-name>
+    </login-config>
+
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <role-name>user</role-name>
+    </security-role>
+
+</web-app>

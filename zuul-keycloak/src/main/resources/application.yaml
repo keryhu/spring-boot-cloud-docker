@@ -34,10 +34,16 @@ spring:
 #userInfoUri: http://authserver:9999/auth/user
 
 zuul:
+  prefix: /api
   ignoredServices: '*'
   routes:
     basket:
       serviceId: basket
       path: /basket/**
-      stripPrefix: true
+      stripPrefix: false
+      retryable: true
+    product:
+      serviceId: product
+      path: /product/**
+      stripPrefix: false
       retryable: true

@@ -36,7 +36,8 @@
         <module>product</module>
         <module>eureka</module>
 	    <module>config</module>
-        <module>zuul</module>
+        <module>zuul-keycloak-boot</module>
+        <module>zuul-keycloak-webapp</module>
         <module>commercial-model</module>
         <module>hystrix</module>
         <module>authserver</module>

@@ -1,28 +1,18 @@
 vcl 4.0;
 
-backend zuul {
-  .host = "zuul";
-  .port = "8080";
-}
-
-backend keycloak {
-    .host = "keycloak";
-    .port = "8080";
+backend keycloak_proxy {
+  .host = "keycloak_proxy";
+  .port = "7080";
 }
 
 sub vcl_recv {
-    if (req.url ~ "^/auth/") {
-        set req.backend_hint = keycloak;
-    } else {
-        set req.backend_hint = zuul;
-    }
+        set req.backend_hint = keycloak_proxy;
 }
 
 sub vcl_backend_response {
-    if (bereq.url ~ "^/auth/") {
+    if (bereq.url ~ "^/api") {
         set beresp.ttl = 0s;
     } else {
         set beresp.ttl = 10s;
     }
-
 }
