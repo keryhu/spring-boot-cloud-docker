@@ -23,38 +23,10 @@
       }
     ,
       "constraints": [
-        {
-          "pattern": "/product/*",
-          "authenticate": true,
-          "roles-allowed": [
-            "booking-api"
-          ],
-          "methods": [
-            "GET",
-            "POST",
-            "PUT",
-            "DELETE"
-          ]
-        },
-        {
-          "pattern": "/basket/*",
-          "authenticate": true,
-          "roles-allowed": [
-            "role_booking_api"
-          ],
-          "methods": [
-            "POST",
-            "PUT",
-            "DELETE"
-          ],
-          "excluded-methods": [
-            "GET"
-          ]
-        },
-        {
-          "pattern": "/test/*",
-          "permit": true
-        }
+        { "pattern": "/product/*", "roles-allowed": [ "ro_product" ], "methods": [ "GET" ] },
+        { "pattern": "/product/*", "roles-allowed": [ "rw_product" ], "methods": [ "PUT", "DELETE", "POST" ] },
+        { "pattern": "/basket/*",  "roles-allowed": [ "ro_basket" ],  "methods": [ "GET" ] },
+        { "pattern": "/basket/*",  "roles-allowed": [ "rw_basket" ],  "methods": [ "PUT", "DELETE", "POST"  ] }
       ]
     }
   ]

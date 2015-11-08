@@ -8,7 +8,6 @@ mvn clean package docker:build
 cd ../config
 mvn clean package docker:build
 
-
 cd ../hystrix
 mvn clean package docker:build
 

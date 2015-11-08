@@ -5,12 +5,12 @@ import com.ib.commercial.model.Product;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Set;
 
 
 @RestController
@@ -46,9 +46,14 @@ public class ProductController {
 
 
     @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
-    Product get(@PathVariable String productId) {
+    Product get(@PathVariable String productId, @RequestHeader HttpHeaders headers) {
 
         log.debug("Product get : "+productId);
+
+        Set<String> keys = headers.keySet();
+        for (String key : keys) {
+            log.debug("Header : "+key+" : "+headers.get(key));
+        }
 
         return repository.findOne(productId);
     }
