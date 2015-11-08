@@ -18,13 +18,17 @@
         "resource": "iberia-services",
         "credentials": {
           "secret": "568bb37a-db2c-4134-aac2-6deacb3e91a3"
-        }
+        },
+        "use-resource-role-mappings": true
       }
     ,
       "constraints": [
         {
           "pattern": "/product/*",
           "authenticate": true,
+          "roles-allowed": [
+            "booking-api"
+          ],
           "methods": [
             "GET",
             "POST",
@@ -35,6 +39,9 @@
         {
           "pattern": "/basket/*",
           "authenticate": true,
+          "roles-allowed": [
+            "role_booking_api"
+          ],
           "methods": [
             "POST",
             "PUT",

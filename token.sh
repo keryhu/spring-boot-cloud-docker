@@ -7,7 +7,6 @@ ACCESS_TOKEN=`curl -s iberia-services:568bb37a-db2c-4134-aac2-6deacb3e91a3@${DOC
  -d client_id=ios_app \
  -d grant_type=password \
  -d username=justin \
- -d scope=bookingi_api \
  -d password=toffee | jq -r .access_token`
 
 echo ${ACCESS_TOKEN}
