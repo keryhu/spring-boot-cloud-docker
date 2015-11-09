@@ -28,7 +28,7 @@ keycloak:
   image: justindav1s/keycloak-postgres
   ports:
    - "9080:8080"
-  links:
-   - postgres
+  external_links:
+   - data_postgres_1:postgres
 
 
