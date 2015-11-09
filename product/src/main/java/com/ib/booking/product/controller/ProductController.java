@@ -1,9 +1,11 @@
 package com.ib.booking.product.controller;
 
+import ch.qos.logback.classic.Logger;
 import com.ib.booking.product.repository.ProductRepository;
 import com.ib.commercial.model.Product;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,8 @@ import java.util.Set;
 @RequestMapping("/product")
 public class ProductController {
 
+    Logger fastKafkaLogger = (Logger) LoggerFactory.getLogger("fast-kafka");
+
     private Log log = LogFactory.getLog(ProductController.class);
 
     @Autowired
@@ -25,7 +29,7 @@ public class ProductController {
     @PostConstruct
     public void init()  {
 
-        log.debug("Setting up repository");
+        fastKafkaLogger.debug("Setting up repository");
 
         if(repository.count() == 0) {
             repository.insert(new Product("1", "marmalade"));
@@ -48,11 +52,11 @@ public class ProductController {
     @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
     Product get(@PathVariable String productId, @RequestHeader HttpHeaders headers) {
 
-        log.debug("Product get : "+productId);
+        fastKafkaLogger.debug("Product get : "+productId);
 
         Set<String> keys = headers.keySet();
         for (String key : keys) {
-            log.debug("Header : "+key+" : "+headers.get(key));
+            fastKafkaLogger.debug("Header : "+key+" : "+headers.get(key));
         }
 
         return repository.findOne(productId);

@@ -1,0 +1,21 @@
+zuul:
+  image: justindav1s/zuul
+  ports:
+   - "8080:8080"
+  links:
+   - eureka
+   - config
+
+keycloakproxy:
+  image: justindav1s/keycloak_proxy
+  ports:
+   - "7080:8080"
+  links:
+   - zuul
+
+varnish:
+  image: justindav1s/varnish
+  ports:
+   - "80:80"
+  links:
+   - keycloakproxy

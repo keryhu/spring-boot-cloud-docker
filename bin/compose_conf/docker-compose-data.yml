@@ -1,0 +1,7 @@
+postgres:
+  image: justindav1s/postgres
+
+mongo:
+  image: justindav1s/mongo
+  ports:
+   - "27017:27017"

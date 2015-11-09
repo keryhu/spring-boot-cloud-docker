@@ -1,0 +1,34 @@
+eureka:
+  image: justindav1s/eureka
+  ports:
+   - "8761:8761"
+
+hystrix:
+  image: justindav1s/hystrix
+  ports:
+   - "9000:9000"
+
+kafka:
+  image: justindav1s/kafka
+  ports:
+   - "2181:2181"
+   - "9092:9092"
+  environment:
+   - ADVERTISED_HOST=${DOCKER_DAEMON_IP}
+   - ADVERTISED_PORT=9092
+
+config:
+  image: justindav1s/config
+  ports:
+   - "8888:8888"
+  links:
+   - eureka
+
+keycloak:
+  image: justindav1s/keycloak-postgres
+  ports:
+   - "9080:8080"
+  links:
+   - postgres
+
+
