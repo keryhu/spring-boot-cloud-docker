@@ -11,7 +11,7 @@
     {
       "base-path": "/api",
       "adapter-config": {
-        "realm": "Iberia Commercial",
+        "realm": "Iberia_Commercial",
         "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh9MaSHv3nLOj8JY1EuqLhwd0fUKe+71UC+4oHsSKShE9qpKYZOwCHj/sILUs1pqpSKijNh1go7rxQOxOU6GiggGPxtnJUgp8KKPuKhwaJsrEMHP0fanbjIvh56h9hC3fixaewrp8Ufaf0xUulI1uwzhZrPJhCBHq68eXjqNWP6/RI7IWXBQdbKPaGrAkEUou/qOQt8R/JOkc3kxTsdhNgyDrVYXFvMMkNGIhJaLqwEyxQiLrH9rfC5mwjadEo8lAY56KoB7pM60OI6ruqDtR+dmY19rCbh9cecWUKW7BoucFKoQe9pMZy75NRVS8+tcNO5z63SIIvnENXvtjHqLoWwIDAQAB",
         "auth-server-url": "http://192.168.99.100:9080/auth",
         "ssl-required": "external",

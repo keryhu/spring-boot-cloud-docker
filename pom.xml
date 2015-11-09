@@ -39,7 +39,6 @@
         <module>zuul</module>
         <module>commercial-model</module>
         <module>hystrix</module>
-        <module>authserver</module>
         <module>turbine</module>
     </modules>
 

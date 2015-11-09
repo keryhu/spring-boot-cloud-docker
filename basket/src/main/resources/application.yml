@@ -7,7 +7,7 @@ spring:
       userInfoUri: http://${DOCKER_MACHINE_ADDR}:9080/auth/realms/master/protocol/openid-connect/userinfo
   data:
     mongodb:
-      host: mongo
+      host: data_mongo_1
       port : 27017
   cloud:
     config:

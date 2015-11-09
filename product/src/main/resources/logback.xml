@@ -26,7 +26,7 @@ failure conditions but wont block your application at all -->
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </layout>
     </encoder>
-    <topic>boring-logs</topic>
+    <topic>product-logs</topic>
     <!-- we don't care how the log messages will be partitioned  -->
     <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.RoundRobinKeyingStrategy" />
 
@@ -36,7 +36,7 @@ failure conditions but wont block your application at all -->
     <!-- each <producerConfig> translates to regular kafka-client config (format: key=value) -->
     <!-- producer configs are documented here: https://kafka.apache.org/documentation.html#newproducerconfigs -->
     <!-- bootstrap.servers is the only mandatory producerConfig -->
-    <producerConfig>bootstrap.servers=localhost:9092</producerConfig>
+    <producerConfig>bootstrap.servers=kafka:9092</producerConfig>
     <!-- don't wait for a broker to ack the reception of a batch.  -->
     <producerConfig>acks=0</producerConfig>
     <!-- wait up to 1000ms and collect log messages before sending them as a batch -->
@@ -70,7 +70,7 @@ failure conditions but wont block your application at all -->
     <!-- each <producerConfig> translates to regular kafka-client config (format: key=value) -->
     <!-- producer configs are documented here: https://kafka.apache.org/documentation.html#newproducerconfigs -->
     <!-- bootstrap.servers is the only mandatory producerConfig -->
-    <producerConfig>bootstrap.servers=localhost:9092</producerConfig>
+    <producerConfig>bootstrap.servers=infra_kafka_1:9092</producerConfig>
     <!-- restrict the size of the buffered batches to 8MB (default is 32MB) -->
     <producerConfig>buffer.memory=8388608</producerConfig>
 
@@ -93,7 +93,7 @@ failure conditions but wont block your application at all -->
         <appender-ref ref="restrictive-kafka-appender" />
     </logger>
 
-<root level="debug">
+<root level="INFO">
     <appender-ref ref="STDOUT" />
 </root>
 
