@@ -6,7 +6,7 @@ sleep 5
 
 echo Starting the infrastructure tier
 ./infra-start.sh
-sleep 5
+sleep 30
 
 echo Starting the application tier
 ./app-start.sh

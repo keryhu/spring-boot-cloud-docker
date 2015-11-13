@@ -11,17 +11,16 @@
     {
       "base-path": "/api",
       "adapter-config": {
-        "realm": "Iberia_Commercial",
-        "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh9MaSHv3nLOj8JY1EuqLhwd0fUKe+71UC+4oHsSKShE9qpKYZOwCHj/sILUs1pqpSKijNh1go7rxQOxOU6GiggGPxtnJUgp8KKPuKhwaJsrEMHP0fanbjIvh56h9hC3fixaewrp8Ufaf0xUulI1uwzhZrPJhCBHq68eXjqNWP6/RI7IWXBQdbKPaGrAkEUou/qOQt8R/JOkc3kxTsdhNgyDrVYXFvMMkNGIhJaLqwEyxQiLrH9rfC5mwjadEo8lAY56KoB7pM60OI6ruqDtR+dmY19rCbh9cecWUKW7BoucFKoQe9pMZy75NRVS8+tcNO5z63SIIvnENXvtjHqLoWwIDAQAB",
+        "realm": "iberia.com",
+        "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhEzZ0D8bs4/MuVifk329CXL/Yd+Afu+0jAX2G/VOd7rBG7BVI+N8OAloIBbUahIEfSR/gYJenjeWZ4j8rg95SKDtgPbGCVXVlrArZGB3DL764MptZI8ySCKniUqDHg71+wh406Hvk0DouTs/lk7PkICg4+VAh1/TSUn1fFc2vXFn5hmQ68vAMU4KrlT1kLhviDzbAQAfD+adfv29t8+0P0xjq1oVvoiaELQcJOgsZ1EAazZUuzLJQedHYg6bzL8JPj70LUlnq+bdLbu5neKaLdR4lcNHRMM3vPfY9R8cVd56O8lBhtUYsqB7XU4y2Goyl6HkrvXV2CTH+wOPB3E2HwIDAQAB",
         "auth-server-url": "http://192.168.99.100:9080/auth",
         "ssl-required": "external",
-        "resource": "iberia.com",
+        "resource": "ios_app",
         "credentials": {
-          "secret": "75ada485-dac9-40b6-be1d-b7c193d1e3c4"
+          "secret": "7afd2bd8-8579-4edb-8490-216660d0ab89"
         },
         "use-resource-role-mappings": true
-      }
-    ,
+      },
       "constraints": [
         { "pattern": "/product/*", "roles-allowed": [ "ro_product" ], "methods": [ "GET" ] },
         { "pattern": "/product/*", "roles-allowed": [ "rw_product" ], "methods": [ "PUT", "DELETE", "POST" ] },
