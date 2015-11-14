@@ -1,9 +1,12 @@
 package com.ib.booking.basket.proxies;
 
+import com.ib.booking.basket.controller.BasketController;
 import com.ib.commercial.model.Product;
+import com.ib.commercial.trace.InfoLineBuilder;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -26,6 +29,9 @@ public class ProductRepositoryProxy {
 
     private Log log = LogFactory.getLog(ProductRepositoryProxy.class);
 
+    ch.qos.logback.classic.Logger fastKafkaLogger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger("fast-kafka");
+    ch.qos.logback.classic.Logger fastKafkaErrorLogger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger("fast-kafka-error");
+
     @Autowired
     private DiscoveryClient discoveryClient;
 
@@ -34,6 +40,10 @@ public class ProductRepositoryProxy {
 
     @HystrixCommand(fallbackMethod = "handleProductNotAvailError")
     public Product getProduct(String id) {
+
+        String[] args = { ProductRepositoryProxy.class.toString(), "getProduct", "basket", id };
+        fastKafkaLogger.debug(InfoLineBuilder.getLine(args, null, null));
+
         getProductServices();
 
         ResponseEntity<Product> exchange =
@@ -54,6 +64,10 @@ public class ProductRepositoryProxy {
     }
 
     public Object handleProductNotAvailError(String id) {
+
+        String[] args = { ProductRepositoryProxy.class.toString(), "handleProductNotAvailError", "basket", id };
+        fastKafkaErrorLogger.debug(InfoLineBuilder.getLine(args, null, null));
+
         log.error("TRIGGERED HYSTRIX CIRCUIT BREAKER");
         return new Product(id, "product not available");
     }
@@ -61,6 +75,10 @@ public class ProductRepositoryProxy {
 
     @HystrixCommand(fallbackMethod = "handleProductServiceError")
     private void getProductServices()   {
+
+        String[] args = { ProductRepositoryProxy.class.toString(), "getProductServices", "basket" };
+        fastKafkaLogger.debug(InfoLineBuilder.getLine(args, null, null));
+
         List<String> services = discoveryClient.getServices();
         Iterator it = services.iterator();
         while (it.hasNext())   {
@@ -84,6 +102,10 @@ public class ProductRepositoryProxy {
     }
 
     public Object handleProductServiceError(String id) {
+
+        String[] args = { ProductRepositoryProxy.class.toString(), "handleProductServiceError", "basket", id };
+        fastKafkaErrorLogger.debug(InfoLineBuilder.getLine(args, null, null));
+
         log.error("TRIGGERED HYSTRIX CIRCUIT BREAKER");
         return new Product(id, "product repository down");
     }

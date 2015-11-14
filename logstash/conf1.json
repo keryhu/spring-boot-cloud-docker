@@ -1,0 +1,24 @@
+input {
+    kafka {
+      topic_id => "product-logs"
+      codec => "line"
+      zk_connect => "192.168.99.100:2181"
+    }
+}
+
+filter {
+  grok {
+    match => [ "message", ${DATESTAMP_EVENTLOG}
+  }
+}
+
+output {
+  # Emit events to stdout for easy debugging of what is going through
+  # logstash.
+  stdout { }
+
+  # This elasticsearch output will try to autodiscover a near-by
+  # elasticsearch cluster using multicast discovery.
+  # If multicast doesn't work, you'll need to set a 'host' setting.
+  #elasticsearch { }
+}

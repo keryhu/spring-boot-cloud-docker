@@ -3,6 +3,7 @@ package com.ib.booking.product.controller;
 import ch.qos.logback.classic.Logger;
 import com.ib.booking.product.repository.ProductRepository;
 import com.ib.commercial.model.Product;
+import com.ib.commercial.trace.InfoLineBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.slf4j.LoggerFactory;
@@ -52,12 +53,11 @@ public class ProductController {
     @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
     Product get(@PathVariable String productId, @RequestHeader HttpHeaders headers) {
 
-        fastKafkaLogger.debug("Product get : "+productId);
+        String[] args = { ProductController.class.toGenericString(), "get", "product", productId };
+        String[] keys = { "keycloak_name", "keycloak_email", "x-forwarded-for", "keycloak_username", "keycloak_subject" };
 
-        Set<String> keys = headers.keySet();
-        for (String key : keys) {
-            fastKafkaLogger.debug("Header : "+key+" : "+headers.get(key));
-        }
+        fastKafkaLogger.debug("Product get : "+productId);
+        fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
 
         return repository.findOne(productId);
     }

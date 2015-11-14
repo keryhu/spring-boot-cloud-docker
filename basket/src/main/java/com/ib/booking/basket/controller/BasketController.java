@@ -4,10 +4,12 @@ import com.ib.booking.basket.proxies.ProductRepositoryProxy;
 import com.ib.booking.basket.repositories.BasketRepository;
 import com.ib.commercial.model.Basket;
 import com.ib.commercial.model.Product;
+import com.ib.commercial.trace.InfoLineBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.cloud.security.oauth2.resource.EnableOAuth2Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,8 @@ import java.util.List;
 //@EnableOAuth2Resource
 public class BasketController {
 
+    ch.qos.logback.classic.Logger fastKafkaLogger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger("fast-kafka");
+    ch.qos.logback.classic.Logger fastKafkaErrorLogger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger("fast-kafka-error");
     private static final Logger log = LoggerFactory.getLogger(BasketController.class);
 
     @Autowired
@@ -31,10 +35,16 @@ public class BasketController {
     @Autowired
     private BasketRepository basketRepository;
 
+    String[] keys = { "keycloak_name", "keycloak_email", "x-forwarded-for", "keycloak_username", "keycloak_subject" };
+
     @RequestMapping(value = "/create/{basketId}", method = RequestMethod.PUT)
-    ResponseEntity<?> create(@PathVariable String basketId) {
+    ResponseEntity<?> create(@PathVariable String basketId, @RequestHeader HttpHeaders headers) {
+
+        String[] args = { BasketController.class.toString(), "create", "basket", basketId };
+        fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
 
         log.debug("Create");
+
         //log.debug("ProductApi: User={}, Auth={}, called with productId={}", currentUser.getName(), authorizationHeader, basketId);
         basketRepository.insert(new Basket(basketId));
         Basket basket = basketRepository.findOne(basketId);
@@ -42,21 +52,33 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/remove/{basketId}", method = RequestMethod.DELETE)
-    ResponseEntity<?> delete(@PathVariable String basketId)    {
+    ResponseEntity<?> delete(@PathVariable String basketId, @RequestHeader HttpHeaders headers)    {
+
+        String[] args = { BasketController.class.toString(), "remove", "basket", basketId };
+        fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
+
         log.debug("Remove Basket#"+basketId);
         basketRepository.delete(basketId);
         return new ResponseEntity<>(null, null, HttpStatus.GONE);
     }
 
     @RequestMapping(value = "/clearall", method = RequestMethod.DELETE)
-    ResponseEntity<?> clearall()    {
+    ResponseEntity<?> clearall(@RequestHeader HttpHeaders headers)    {
+
+        String[] args = { BasketController.class.toString(), "clearall", "basket" };
+        fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
+
         log.debug("Clearing all Baskets");
         basketRepository.deleteAll();
         return new ResponseEntity<>(null, null, HttpStatus.GONE);
     }
 
     @RequestMapping(value = "/{basketId}/add/{productId}", method = RequestMethod.PUT)
-    ResponseEntity<Basket> add(@PathVariable String basketId, @PathVariable String productId) {
+    ResponseEntity<Basket> add(@PathVariable String basketId, @PathVariable String productId, @RequestHeader HttpHeaders headers) {
+
+
+        String[] args = { BasketController.class.toString(), "add", "basket", basketId, productId };
+        fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
 
         log.debug("Basket #"+basketId+" Add Product#"+productId);
 
@@ -75,7 +97,10 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/{basketId}/remove/{productId}", method = RequestMethod.DELETE)
-    ResponseEntity<Basket> remove(@PathVariable String basketId, @PathVariable String productId) {
+    ResponseEntity<Basket> remove(@PathVariable String basketId, @PathVariable String productId, @RequestHeader HttpHeaders headers) {
+
+        String[] args = { BasketController.class.toString(), "remove", "basket", basketId, productId };
+        fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
 
         log.debug("Basket #"+basketId+" Add Product#"+productId);
 
@@ -90,7 +115,10 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/{basketId}/empty", method = RequestMethod.POST)
-    ResponseEntity<Basket> empty(@PathVariable String basketId) {
+    ResponseEntity<Basket> empty(@PathVariable String basketId, @RequestHeader HttpHeaders headers) {
+
+        String[] args = { BasketController.class.toString(), "empty", "basket", basketId };
+        fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
 
         log.debug("Basket #"+basketId+" Emptying");
 
@@ -104,7 +132,11 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/{basketId}", method = RequestMethod.GET)
-    ResponseEntity<Basket>  get(@PathVariable String basketId) {
+    ResponseEntity<Basket>  get(@PathVariable String basketId, @RequestHeader HttpHeaders headers) {
+
+        String[] args = { BasketController.class.toString(), "get", "basket", basketId };
+        fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
+
 
         log.debug("Get basket : "+basketId);
 
@@ -115,7 +147,11 @@ public class BasketController {
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    ResponseEntity<List<Basket>>  list() {
+    ResponseEntity<List<Basket>>  list(@RequestHeader HttpHeaders headers) {
+
+        String[] args = { BasketController.class.toString(), "list", "basket" };
+        fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
+
 
         log.debug("List baskets");
 
