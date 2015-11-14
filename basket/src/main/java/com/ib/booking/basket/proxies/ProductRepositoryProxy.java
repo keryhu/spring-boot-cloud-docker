@@ -41,7 +41,7 @@ public class ProductRepositoryProxy {
     @HystrixCommand(fallbackMethod = "handleProductNotAvailError")
     public Product getProduct(String id) {
 
-        String[] args = { ProductRepositoryProxy.class.toString(), "getProduct", "basket", id };
+        String[] args = { ProductRepositoryProxy.class.getName(), "getProduct", "basket", id };
         fastKafkaLogger.debug(InfoLineBuilder.getLine(args, null, null));
 
         getProductServices();
@@ -65,7 +65,7 @@ public class ProductRepositoryProxy {
 
     public Object handleProductNotAvailError(String id) {
 
-        String[] args = { ProductRepositoryProxy.class.toString(), "handleProductNotAvailError", "basket", id };
+        String[] args = { ProductRepositoryProxy.class.getName(), "handleProductNotAvailError", "basket", id };
         fastKafkaErrorLogger.debug(InfoLineBuilder.getLine(args, null, null));
 
         log.error("TRIGGERED HYSTRIX CIRCUIT BREAKER");
@@ -76,7 +76,7 @@ public class ProductRepositoryProxy {
     @HystrixCommand(fallbackMethod = "handleProductServiceError")
     private void getProductServices()   {
 
-        String[] args = { ProductRepositoryProxy.class.toString(), "getProductServices", "basket" };
+        String[] args = { ProductRepositoryProxy.class.getName(), "getProductServices", "basket" };
         fastKafkaLogger.debug(InfoLineBuilder.getLine(args, null, null));
 
         List<String> services = discoveryClient.getServices();
@@ -103,7 +103,7 @@ public class ProductRepositoryProxy {
 
     public Object handleProductServiceError(String id) {
 
-        String[] args = { ProductRepositoryProxy.class.toString(), "handleProductServiceError", "basket", id };
+        String[] args = { ProductRepositoryProxy.class.getName(), "handleProductServiceError", "basket", id };
         fastKafkaErrorLogger.debug(InfoLineBuilder.getLine(args, null, null));
 
         log.error("TRIGGERED HYSTRIX CIRCUIT BREAKER");

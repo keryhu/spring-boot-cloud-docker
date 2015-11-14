@@ -40,7 +40,7 @@ public class BasketController {
     @RequestMapping(value = "/create/{basketId}", method = RequestMethod.PUT)
     ResponseEntity<?> create(@PathVariable String basketId, @RequestHeader HttpHeaders headers) {
 
-        String[] args = { BasketController.class.toString(), "create", "basket", basketId };
+        String[] args = { BasketController.class.getName(), "create", "basket", basketId };
         fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
 
         log.debug("Create");
@@ -54,7 +54,7 @@ public class BasketController {
     @RequestMapping(value = "/remove/{basketId}", method = RequestMethod.DELETE)
     ResponseEntity<?> delete(@PathVariable String basketId, @RequestHeader HttpHeaders headers)    {
 
-        String[] args = { BasketController.class.toString(), "remove", "basket", basketId };
+        String[] args = { BasketController.class.getName(), "remove", "basket", basketId };
         fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
 
         log.debug("Remove Basket#"+basketId);
@@ -65,7 +65,7 @@ public class BasketController {
     @RequestMapping(value = "/clearall", method = RequestMethod.DELETE)
     ResponseEntity<?> clearall(@RequestHeader HttpHeaders headers)    {
 
-        String[] args = { BasketController.class.toString(), "clearall", "basket" };
+        String[] args = { BasketController.class.getName(), "clearall", "basket" };
         fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
 
         log.debug("Clearing all Baskets");
@@ -77,7 +77,7 @@ public class BasketController {
     ResponseEntity<Basket> add(@PathVariable String basketId, @PathVariable String productId, @RequestHeader HttpHeaders headers) {
 
 
-        String[] args = { BasketController.class.toString(), "add", "basket", basketId, productId };
+        String[] args = { BasketController.class.getName(), "add", "basket", basketId, productId };
         fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
 
         log.debug("Basket #"+basketId+" Add Product#"+productId);
@@ -99,7 +99,7 @@ public class BasketController {
     @RequestMapping(value = "/{basketId}/remove/{productId}", method = RequestMethod.DELETE)
     ResponseEntity<Basket> remove(@PathVariable String basketId, @PathVariable String productId, @RequestHeader HttpHeaders headers) {
 
-        String[] args = { BasketController.class.toString(), "remove", "basket", basketId, productId };
+        String[] args = { BasketController.class.getName(), "remove", "basket", basketId, productId };
         fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
 
         log.debug("Basket #"+basketId+" Add Product#"+productId);
@@ -117,7 +117,7 @@ public class BasketController {
     @RequestMapping(value = "/{basketId}/empty", method = RequestMethod.POST)
     ResponseEntity<Basket> empty(@PathVariable String basketId, @RequestHeader HttpHeaders headers) {
 
-        String[] args = { BasketController.class.toString(), "empty", "basket", basketId };
+        String[] args = { BasketController.class.getName(), "empty", "basket", basketId };
         fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
 
         log.debug("Basket #"+basketId+" Emptying");
@@ -134,7 +134,7 @@ public class BasketController {
     @RequestMapping(value = "/{basketId}", method = RequestMethod.GET)
     ResponseEntity<Basket>  get(@PathVariable String basketId, @RequestHeader HttpHeaders headers) {
 
-        String[] args = { BasketController.class.toString(), "get", "basket", basketId };
+        String[] args = { BasketController.class.getName(), "get", "basket", basketId };
         fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
 
 
@@ -149,7 +149,7 @@ public class BasketController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     ResponseEntity<List<Basket>>  list(@RequestHeader HttpHeaders headers) {
 
-        String[] args = { BasketController.class.toString(), "list", "basket" };
+        String[] args = { BasketController.class.getName(), "list", "basket" };
         fastKafkaLogger.debug(InfoLineBuilder.getLine(args, headers, keys));
 
 

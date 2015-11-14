@@ -53,7 +53,7 @@ public class ProductController {
     @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
     Product get(@PathVariable String productId, @RequestHeader HttpHeaders headers) {
 
-        String[] args = { ProductController.class.toGenericString(), "get", "product", productId };
+        String[] args = { ProductController.class.getName(), "get", "product", productId };
         String[] keys = { "keycloak_name", "keycloak_email", "x-forwarded-for", "keycloak_username", "keycloak_subject" };
 
         fastKafkaLogger.debug("Product get : "+productId);
