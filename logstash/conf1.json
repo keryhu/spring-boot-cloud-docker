@@ -6,16 +6,28 @@ input {
     }
 }
 
+# 14 11 2015 19:53:32.515 [http-nio-8080-exec-4] DEBUG fast-kafka - |f3126060b294|com.ib.booking.product.controller.ProductController|get|product|3|Justin Davis|justinndavis@gmail.com|172.17.42.1|justin|1d86cfd3-1365-4639-91bd-8959a714d18a
 filter {
   grok {
-    match => [ "message", ${DATESTAMP_EVENTLOG}
+    match => {message => [
+        "%{MONTHDAY:day} %{MONTHNUM:month} %{YEAR:year} %{TIME:time} \[%{DATA:thread}\] %{LOGLEVEL:level} %{DATA:logger} - \|%{DATA:host}\|%{DATA:class}\|%{WORD:method}\|%{WORD:resource}\|%{NUMBER:resource_id}\|%{WORD:first_name} %{WORD:last_name}\|%{DATA:email}\|%{IP:ip}\|%{WORD:username}\|%{GREEDYDATA:subject_id}",
+        "%{MONTHDAY:day} %{MONTHNUM:month} %{YEAR:year} %{TIME:time} \[%{DATA:thread}\] %{LOGLEVEL:level} %{DATA:logger} - %{GREEDYDATA:msg}"
+      ]
+    }
   }
 }
 
 output {
+
+  file {
+    codec => "rubydebug"
+    path => "out2.log"
+  }
   # Emit events to stdout for easy debugging of what is going through
   # logstash.
-  stdout { }
+  stdout {
+    codec => rubydebug
+  }
 
   # This elasticsearch output will try to autodiscover a near-by
   # elasticsearch cluster using multicast discovery.
