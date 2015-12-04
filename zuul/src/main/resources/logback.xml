@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <logger name="org.springframework.web" level="DEBUG"/>
+    <!--include resource="org/springframework/boot/logging/logback/base.xml"/ -->
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="com.netflix" level="INFO"/>
+    <logger name="org.apache" level="INFO"/>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="sun.net" level="ERROR"/>
+    <logger name="com.sun" level="ERROR"/>
     <logger name="com.ib" level="debug"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -85,7 +90,7 @@
         <appender-ref ref="fast-kafka-error-appender" />
     </logger>
 
-    <root level="INFO">
+    <root level="debug">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>

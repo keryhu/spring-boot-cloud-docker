@@ -16,27 +16,27 @@ public class SimpleFilter extends ZuulFilter {
     @Override
     public String filterType() {
         String type = "pre";
-        log.debug("Filter Type : "+type);
+        log.debug("********* Filter Type : "+type);
         return type;
     }
 
     @Override
     public int filterOrder() {
         int order = 1;
-        log.debug("Filter Order : "+order);
+        log.debug("********* Filter Order : "+order);
         return order;
     }
 
     @Override
     public boolean shouldFilter() {
         boolean filter = true;
-        log.debug("Filter  : "+filter);
+        log.debug("********* Filter  : "+filter);
         return true;
     }
 
     @Override
     public Object run() {
-        log.debug("run !");
+        log.debug("********* run !");
         return null;
     }
 }
